@@ -10,60 +10,60 @@
         .finance-card { background: linear-gradient(145deg, #0f172a, #1e293b); }
         .gold-accent { color: #fbbf24; }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        .responsive-text { font-size: clamp(1.2rem, 4vw, 2.5rem); }
+        .responsive-text { font-size: clamp(1.1rem, 3.8vw, 2.2rem); }
     </style>
 </head>
-<body class="bg-slate-50 p-4 md:p-10">
+<body class="bg-slate-100 p-4 md:p-10">
 
-    <div class="max-w-4xl mx-auto bg-white rounded-[3rem] shadow-2xl p-6 md:p-10 border border-slate-100">
+    <div class="max-w-4xl mx-auto bg-white rounded-[3rem] shadow-2xl p-6 md:p-10 border border-slate-200">
         <h2 class="text-2xl md:text-3xl font-extrabold mb-10 text-center italic tracking-tight text-slate-800 uppercase">
-            Analisis Finansial Invila™
+            Analisis Investasi & Saving Invila™
         </h2>
 
         <div class="grid md:grid-cols-3 gap-4 mb-10">
             <div>
                 <label class="block text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-widest italic">Volume (m³/hari)</label>
                 <input type="number" id="vol_total" value="2000" oninput="calculate()" 
-                    class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-xl font-bold text-lg outline-none focus:border-blue-500 transition shadow-inner">
+                    class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-xl font-bold text-lg outline-none focus:border-blue-500 transition shadow-inner italic text-slate-700">
             </div>
             <div>
                 <label class="block text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-widest italic">Harga PDAM (Rp/m³)</label>
                 <input type="number" id="pdam_price" value="14600" oninput="calculate()" 
-                    class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-xl font-bold text-lg outline-none focus:border-blue-500 transition">
+                    class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-xl font-bold text-lg outline-none focus:border-blue-500 transition italic text-slate-700">
             </div>
             <div>
                 <label class="block text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-widest italic">Jasa Invila™ (Rp/m³)</label>
                 <input type="number" id="invila_price" value="6900" oninput="calculate()" 
-                    class="w-full bg-slate-50 border-2 border-emerald-100 p-4 rounded-xl font-bold text-lg outline-none focus:border-emerald-500 text-emerald-700">
+                    class="w-full bg-slate-50 border-2 border-emerald-100 p-4 rounded-xl font-bold text-lg outline-none focus:border-emerald-500 text-emerald-700 italic">
             </div>
         </div>
 
         <div class="grid md:grid-cols-2 gap-6">
             
-            <div class="bg-emerald-600 rounded-[2rem] p-8 text-white shadow-xl relative overflow-hidden">
-                <p class="uppercase tracking-widest text-[10px] font-bold opacity-80 mb-2 italic">Estimasi Saving Bulanan</p>
+            <div class="bg-emerald-600 rounded-[2rem] p-8 text-white shadow-xl relative overflow-hidden border-b-8 border-emerald-700">
+                <p class="uppercase tracking-widest text-[10px] font-bold opacity-80 mb-2 italic">Estimasi Saving Bulanan (OPEX)</p>
                 <div id="monthly_saving" class="responsive-text font-black mb-4 italic leading-none">Rp 0</div>
-                <div class="inline-block bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/30 text-[10px] md:text-xs font-bold">
-                    Efisiensi Tahunan: <span id="annual_saving">Rp 0</span>
+                <div class="inline-block bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/30 text-[10px] md:text-xs font-bold uppercase tracking-wider">
+                    Tahunan: <span id="annual_saving">Rp 0</span>
                 </div>
             </div>
 
-            <div class="finance-card rounded-[2rem] p-8 text-white shadow-xl border-t-4 border-amber-500">
+            <div class="finance-card rounded-[2rem] p-8 text-white shadow-xl border-t-4 border-amber-500 border-b-8 border-slate-900">
                 <p class="uppercase tracking-widest text-[10px] font-bold gold-accent mb-2 italic">Estimasi Nilai Investasi (CAPEX)</p>
                 <div id="capex_value" class="responsive-text font-black mb-4 gold-accent italic leading-none">Rp 0</div>
-                <div class="inline-block bg-amber-500/10 px-4 py-2 rounded-full border border-amber-500/30 text-[10px] md:text-xs font-bold text-amber-200">
-                    Kapasitas Terukur: <span id="lps_value">0</span> LPS
+                <div class="inline-block bg-amber-500/10 px-4 py-2 rounded-full border border-amber-500/30 text-[10px] md:text-xs font-bold text-amber-200 uppercase tracking-widest">
+                    Kapasitas: <span id="lps_value">0</span> LPS
                 </div>
             </div>
 
         </div>
 
         <div class="mt-10 text-center">
-            <p class="text-slate-400 text-[11px] mb-6 italic leading-relaxed">
-                *Estimasi CAPEX dihitung berdasarkan Rp 250 Juta per 1 LPS (Liter Per Second).
+            <p class="text-slate-400 text-[10px] md:text-[11px] mb-8 italic leading-relaxed">
+                *Analisis finansial otomatis: CAPEX dihitung berbasis Rp 350.000.000 per 1 LPS kapasitas terpasang.
             </p>
             <button onclick="kirimWA()" 
-                class="w-full bg-slate-900 hover:bg-black text-white px-10 py-5 rounded-2xl text-lg font-extrabold transition shadow-xl transform active:scale-95 italic">
+                class="w-full bg-slate-900 hover:bg-black text-white px-10 py-5 rounded-2xl text-lg font-extrabold transition shadow-xl transform active:scale-95 italic uppercase tracking-tighter">
                 Kirim Hasil ke WhatsApp
             </button>
         </div>
@@ -75,15 +75,14 @@
             const pdam = parseFloat(document.getElementById('pdam_price').value) || 0;
             const invila = parseFloat(document.getElementById('invila_price').value) || 0;
 
-            // Logika Saving
+            // 1. Kalkulasi Saving (OPEX)
             const savingPerDay = (pdam - invila) * vol;
             const savingMonthly = savingPerDay * 30;
             const savingAnnual = savingMonthly * 12;
 
-            // Logika CAPEX (Rp 250jt / LPS)
-            // 1 m3/hari = 1/86.4 LPS
+            // 2. Kalkulasi CAPEX (Rp 350.000.000 / LPS)
             const lps = vol / 86.4;
-            const capex = lps * 250000000;
+            const capex = lps * 350000000;
 
             const fmt = new Intl.NumberFormat('id-ID', {
                 style: 'currency', currency: 'IDR', maximumFractionDigits: 0
@@ -96,10 +95,13 @@
         }
 
         function kirimWA() {
+            // Mengambil volume terbaru dari input saat tombol diklik
             const vol = document.getElementById('vol_total').value;
-            const saving = document.getElementById('monthly_saving').innerText;
-            const capex = document.getElementById('capex_value').innerText;
-            const msg = `Halo Tim Invila, saya ingin konsultasi sistem WWTP.\n\nSimulasi:\n- Kapasitas: ${vol} m3/hari\n- Saving: ${saving}/bulan\n- Est. Capex: ${capex}`;
+            
+            // Format Pesan Baru sesuai permintaan:
+            // "Halo Tim Invila, saya ingin konsultasi sistem SPAM. Untuk: • Kapasitas: [Volume] m³/hari sesuai sesuai simulasi Volume (m³/hari)"
+            const msg = `Halo Tim Invila, saya ingin konsultasi sistem SPAM.\n\nUntuk:\n• Kapasitas: ${vol} m³/hari sesuai sesuai simulasi Volume (m³/hari)`;
+            
             window.open(`https://wa.me/6285890135859?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
