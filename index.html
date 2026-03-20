@@ -4,89 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; }
-        .ceo-card { background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f1f5f9; color: #1e293b; }
+        .finance-card { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
         .gold-bright { color: #fbbf24; }
-        input { font-size: 1.5rem !important; font-weight: 800 !important; }
-        .label-ceo { font-size: 0.85rem; font-weight: 700; color: #64748b; letter-spacing: 0.05em; text-transform: uppercase; }
-        /* Memperbesar angka utama agar mudah dibaca tanpa kacamata */
-        .big-number { font-size: clamp(2rem, 5vw, 4rem); line-height: 1; font-weight: 900; }
+        input { font-size: 1.25rem !important; font-weight: 700 !important; }
+        .label-header { font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 0.1em; text-transform: uppercase; }
+        .value-display { font-size: 1.75rem; font-weight: 800; line-height: 1.2; }
+        @media (min-width: 768px) { .value-display { font-size: 2.1rem; } }
     </style>
 </head>
-<body class="p-4 md:p-12">
+<body class="p-4 md:p-8">
 
-    <div class="max-w-5xl mx-auto bg-white rounded-[3rem] shadow-2xl border-4 border-slate-100 overflow-hidden">
+    <div class="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 overflow-hidden">
         
-        <div class="p-8 md:p-12 border-b-2 border-slate-50 text-center">
-            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight italic uppercase">
-                Simulasi Investasi SPAM Invila™
+        <div class="p-6 md:p-8 border-b border-slate-100 bg-slate-50">
+            <h1 class="text-xl md:text-2xl font-extrabold text-slate-800 tracking-tight italic uppercase">
+                Simulasi Efisiensi SPAM Invila™
             </h1>
-            <p class="text-slate-500 text-lg md:text-xl mt-4 font-semibold">
-                Analisis Penghematan Operasional & Depresiasi Aset 20 Tahun
-            </p>
+            <p class="text-slate-500 text-sm mt-1 font-medium italic">Analisis Penghematan Biaya Air & Optimasi Modal Kerja (Working Capital)</p>
         </div>
 
-        <div class="p-8 md:p-12 space-y-12">
+        <div class="p-6 md:p-10 space-y-8">
             
-            <div class="grid md:grid-cols-3 gap-10">
-                <div class="space-y-3">
-                    <label class="label-ceo">Volume Air (m³/hari)</label>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div>
+                    <label class="label-header mb-2 block italic">Volume Air (m³/hari)</label>
                     <input type="number" id="vol_total" value="2000" oninput="calculate()" 
-                        class="w-full bg-slate-50 border-4 border-slate-200 p-5 rounded-2xl outline-none focus:border-blue-600 transition shadow-inner">
+                        class="w-full bg-white border-2 border-slate-200 p-3 rounded-xl outline-none focus:border-blue-600 transition italic shadow-sm">
                 </div>
-                <div class="space-y-3">
-                    <label class="label-ceo">Tarif PDAM (Rp/m³)</label>
+                <div>
+                    <label class="label-header mb-2 block italic">Tarif PDAM (Rp/m³)</label>
                     <input type="number" id="pdam_price" value="14600" oninput="calculate()" 
-                        class="w-full bg-slate-50 border-4 border-slate-200 p-5 rounded-2xl outline-none focus:border-blue-600 transition shadow-inner">
+                        class="w-full bg-white border-2 border-slate-200 p-3 rounded-xl outline-none focus:border-blue-600 transition italic shadow-sm">
                 </div>
-                <div class="space-y-3">
-                    <label class="label-ceo">Biaya Invila (Rp/m³)</label>
+                <div>
+                    <label class="label-header mb-2 block italic">Harga Jasa Invila (Rp/m³)</label>
                     <input type="number" id="invila_price" value="6900" oninput="calculate()" 
-                        class="w-full bg-blue-50 border-4 border-blue-200 p-5 rounded-2xl outline-none focus:border-blue-600 text-blue-800 transition shadow-inner">
+                        class="w-full bg-blue-50 border-2 border-blue-200 p-3 rounded-xl outline-none focus:border-blue-600 text-blue-800 transition italic shadow-sm">
                 </div>
             </div>
 
-            <hr class="border-2 border-slate-100">
-
-            <div class="space-y-8">
-                
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="ceo-card rounded-[2.5rem] p-10 text-white shadow-xl relative overflow-hidden">
-                        <p class="label-ceo text-blue-300 mb-4">Nilai Investasi Aset (CAPEX)</p>
-                        <div id="capex_value" class="big-number gold-bright italic">Rp 0</div>
-                        <p class="mt-6 text-blue-200 font-bold text-lg">Basis: Rp 350 Juta / LPS</p>
-                    </div>
-
-                    <div class="bg-slate-900 rounded-[2.5rem] p-10 text-white shadow-xl">
-                        <p class="label-ceo text-slate-400 mb-4">Penyusutan Aset (Akuntansi)</p>
-                        <div id="depreciation_val" class="big-number text-slate-100 italic">Rp 0</div>
-                        <p class="mt-6 text-slate-400 font-bold text-lg">Umur Alat: 20 Tahun (Garis Lurus)</p>
-                    </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="finance-card rounded-3xl p-6 md:p-8 text-white shadow-lg border-l-4 border-amber-500">
+                    <p class="label-header text-blue-300 mb-3 italic">Capex Terhindar (Modal Klien Tetap Utuh)</p>
+                    <div id="capex_value" class="value-display gold-bright italic tracking-tighter">Rp 0</div>
+                    <p class="mt-4 text-blue-200 text-[10px] font-bold uppercase tracking-wider italic">Investasi Sistem Sepenuhnya Ditanggung Invila™</p>
                 </div>
 
-                <div class="bg-emerald-600 rounded-[3rem] p-10 md:p-16 text-white text-center shadow-2xl border-b-[12px] border-emerald-800">
-                    <p class="text-xl md:text-2xl font-bold uppercase tracking-[0.2em] mb-6 opacity-90">Keuntungan Bersih Bulanan (Net Saving)</p>
-                    <div id="net_saving" class="text-4xl md:text-7xl font-black italic tracking-tighter">Rp 0</div>
-                    <div class="mt-10 inline-block bg-white/20 backdrop-blur-lg px-10 py-4 rounded-full border-2 border-white/30 text-xl font-extrabold uppercase italic">
-                        Rp <span id="annual_net">0</span> / Tahun
+                <div class="bg-slate-100 rounded-3xl p-6 md:p-8 border border-slate-200">
+                    <p class="label-header text-slate-500 mb-3 italic">Nilai Manfaat Aset Bulanan</p>
+                    <div id="depreciation_val" class="value-display text-slate-800 italic tracking-tighter">Rp 0</div>
+                    <p class="mt-4 text-slate-500 text-[10px] font-bold uppercase tracking-wider italic">Ekuivalen Depresiasi Alat 20 Tahun</p>
+                </div>
+            </div>
+
+            <div class="bg-emerald-600 rounded-[2rem] p-8 md:p-10 text-white shadow-xl border-b-8 border-emerald-800">
+                <div class="flex flex-col items-center">
+                    <p class="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-4 opacity-90 italic text-center text-emerald-100">Total Penghematan Biaya Air Klien (Monthly Saving)</p>
+                    <div id="net_saving" class="value-display md:text-5xl font-black italic tracking-tighter text-center">Rp 0</div>
+                    
+                    <div class="mt-8 pt-6 border-t border-white/20 w-full text-center">
+                        <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-80 mb-2 italic">Akumulasi Penghematan Per Tahun</p>
+                        <div id="annual_net" class="text-xl md:text-3xl font-extrabold italic">Rp 0</div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-blue-50 border-l-8 border-blue-600 p-8 rounded-r-3xl">
-                <h3 class="text-blue-900 text-xl font-extrabold mb-2 uppercase">Catatan Simulasi:</h3>
-                <ul class="text-blue-800 text-lg space-y-2 font-semibold">
-                    <li>• Perhitungan menggunakan metode **Depresiasi Garis Lurus** selama 20 tahun.</li>
-                    <li>• **Net Saving** adalah penghematan operasional riil yang sudah dikurangi biaya penyusutan alat harian.</li>
-                    <li>• Estimasi ini membantu perusahaan menjaga *Cash Flow* dan nilai aset jangka panjang.</li>
+            <div class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-2xl">
+                <h3 class="text-blue-900 text-sm font-extrabold mb-3 uppercase italic tracking-widest text-center">Keuntungan Strategis Bagi Perusahaan Anda:</h3>
+                <ul class="text-blue-800 text-[11px] md:text-[13px] space-y-2 font-semibold italic">
+                    <li class="flex items-start gap-2"><span>✓</span> <strong>Zero CAPEX:</strong> Perusahaan Anda tidak perlu mengeluarkan modal awal milyaran rupiah untuk infrastruktur SPAM.</li>
+                    <li class="flex items-start gap-2"><span>✓</span> <strong>Cash Flow Aman:</strong> Seluruh biaya operasional (OPEX) jauh lebih rendah dari tarif PDAM, langsung meningkatkan margin laba bulanan.</li>
+                    <li class="flex items-start gap-2"><span>✓</span> <strong>Bebas Resiko Depresiasi:</strong> Beban penyusutan aset dan pemeliharaan teknis selama 20 tahun sepenuhnya menjadi tanggung jawab Invila™.</li>
                 </ul>
             </div>
 
-            <div class="text-center pt-6">
+            <div class="text-center pt-2">
                 <button onclick="kirimWA()" 
-                    class="w-full bg-slate-900 hover:bg-black text-white px-12 py-8 rounded-[2rem] text-2xl md:text-3xl font-black transition transform active:scale-95 shadow-2xl uppercase italic tracking-tighter">
+                    class="w-full bg-slate-900 hover:bg-black text-white px-8 py-5 rounded-2xl text-xl font-extrabold transition shadow-lg transform active:scale-95 italic uppercase tracking-wider">
                     Konsultasi SPAM via WhatsApp
                 </button>
             </div>
@@ -102,26 +99,20 @@
 
             const fmt = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 });
 
-            // 1. Gross Saving
-            const grossSaving = (pdam - invila) * vol * 30;
-
-            // 2. CAPEX & Depreciation (Dasar 350jt/LPS, 20 Thn)
-            const lps = vol / 86.4;
-            const capex = lps * 350000000;
-            const monthlyDepreciation = capex / (20 * 12);
-
-            // 3. Net Saving
-            const netSaving = grossSaving - monthlyDepreciation;
+            // 1. Monthly Saving (Selisih Tarif)
+            const netSaving = (pdam - invila) * vol * 30;
             const annualNet = netSaving * 12;
 
+            // 2. CAPEX & Depreciation (Ditanggung Invila, tapi ditampilkan sebagai "Avoided Cost")
+            const lps = vol / 86.4;
+            const capexAvoided = lps * 350000000;
+            const assetValueMonthly = capexAvoided / (20 * 12);
+
             // Update UI
-            document.getElementById('capex_value').innerText = fmt.format(capex).replace("Rp", "Rp ");
-            document.getElementById('depreciation_val').innerText = fmt.format(monthlyDepreciation).replace("Rp", "Rp ");
+            document.getElementById('capex_value').innerText = fmt.format(capexAvoided).replace("Rp", "Rp ");
+            document.getElementById('depreciation_val').innerText = fmt.format(assetValueMonthly).replace("Rp", "Rp ");
             document.getElementById('net_saving').innerText = fmt.format(netSaving).replace("Rp", "Rp ");
-            document.getElementById('annual_net').innerText = (annualNet/1000000).toFixed(1) + " Juta";
-            
-            // Tambahkan detail tahunan penuh saat hover atau format asli
-            document.getElementById('annual_net').title = fmt.format(annualNet);
+            document.getElementById('annual_net').innerText = fmt.format(annualNet).replace("Rp", "Rp ");
         }
 
         function kirimWA() {
