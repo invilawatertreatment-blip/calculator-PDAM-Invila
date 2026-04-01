@@ -1,127 +1,153 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Invila™ | Strategic Terminal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f1f5f9; color: #1e293b; }
-        .finance-card { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-        .gold-bright { color: #fbbf24; }
-        input { font-size: 1.25rem !important; font-weight: 700 !important; }
-        .label-header { font-size: 0.75rem; font-weight: 700; color: #64748b; letter-spacing: 0.1em; text-transform: uppercase; }
-        .value-display { font-size: 1.75rem; font-weight: 800; line-height: 1.2; }
-        @media (min-width: 768px) { .value-display { font-size: 2.1rem; } }
+        :root {
+            --gold: #C5A059; --navy: #020617; --slate: #1E293B;
+            --emerald: #10B981; --white: #FFFFFF;
+        }
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body { 
+            font-family: 'Inter', sans-serif; background: #020617; 
+            color: #F8FAF9; margin: 0; padding: 20px; display: flex; align-items: center; min-height: 100vh;
+        }
+        .terminal-luxury { 
+            max-width: 600px; margin: 0 auto; background: linear-gradient(145deg, #0f172a, #020617);
+            border: 1px solid rgba(197, 160, 89, 0.2); border-radius: 24px; padding: 45px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8); position: relative;
+        }
+        .terminal-luxury::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gold);
+        }
+        header { text-align: center; margin-bottom: 35px; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--gold); margin: 0; }
+        .tagline { font-size: 10px; color: #94A3B8; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; margin-top: 10px; }
+        
+        .input-group { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 18px; border-radius: 12px; margin-bottom: 15px; }
+        label { display: block; font-size: 9px; font-weight: 700; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+        input { 
+            width: 100%; background: transparent; border: none; color: var(--white); 
+            font-family: 'JetBrains Mono', monospace; font-size: 22px; outline: none;
+        }
+
+        .recovery-banner { 
+            background: rgba(197, 160, 89, 0.1); border: 1px solid var(--gold); padding: 30px; 
+            border-radius: 16px; text-align: center; margin: 30px 0;
+        }
+        .recovery-banner h2 { font-size: 28px; font-family: 'JetBrains Mono', monospace; color: var(--gold); margin: 10px 0; }
+        
+        .btn-luxury { 
+            width: 100%; padding: 22px; background: var(--gold); color: var(--navy); 
+            border: none; border-radius: 12px; font-size: 13px; font-weight: 800; 
+            cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
+        }
+        .btn-luxury:hover { background: #E5C284; transform: translateY(-2px); }
+
+        footer { text-align: center; font-size: 9px; color: #64748B; margin-top: 30px; line-height: 1.8; }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body>
 
-    <div class="max-w-4xl mx-auto bg-white rounded-[2rem] shadow-xl border border-slate-200 overflow-hidden">
-        
-        <div class="p-6 md:p-8 border-b border-slate-100 bg-slate-50">
-            <h1 class="text-xl md:text-2xl font-extrabold text-slate-800 tracking-tight italic uppercase">
-                Simulasi Efisiensi SPAM Invila™
-            </h1>
-            <p class="text-slate-500 text-sm mt-1 font-medium italic">Analisis Penghematan Biaya Air & Optimasi Modal Kerja (Working Capital)</p>
-        </div>
+<div class="terminal-luxury">
+    <header>
+        <h1>INVILA™ STRATEGIC AUDIT</h1>
+        <div class="tagline">Value Optimization Terminal</div>
+    </header>
 
-        <div class="p-6 md:p-10 space-y-8">
-            
-            <div class="grid md:grid-cols-3 gap-6">
-                <div>
-                    <label class="label-header mb-2 block italic">Volume Air (m³/hari)</label>
-                    <input type="number" id="vol_total" value="2000" oninput="calculate()" 
-                        class="w-full bg-white border-2 border-slate-200 p-3 rounded-xl outline-none focus:border-blue-600 transition italic shadow-sm">
-                </div>
-                <div>
-                    <label class="label-header mb-2 block italic">Tarif PDAM (Rp/m³)</label>
-                    <input type="number" id="pdam_price" value="14600" oninput="calculate()" 
-                        class="w-full bg-white border-2 border-slate-200 p-3 rounded-xl outline-none focus:border-blue-600 transition italic shadow-sm">
-                </div>
-                <div>
-                    <label class="label-header mb-2 block italic">Harga Jasa Invila (Rp/m³)</label>
-                    <input type="number" id="invila_price" value="6900" oninput="calculate()" 
-                        class="w-full bg-blue-50 border-2 border-blue-200 p-3 rounded-xl outline-none focus:border-blue-600 text-blue-800 transition italic shadow-sm">
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="finance-card rounded-3xl p-6 md:p-8 text-white shadow-lg border-l-4 border-amber-500">
-                    <p class="label-header text-blue-300 mb-3 italic">Capex Terhindar (Modal Klien Tetap Utuh)</p>
-                    <div id="capex_value" class="value-display gold-bright italic tracking-tighter">Rp 0</div>
-                    <p class="mt-4 text-blue-200 text-[10px] font-bold uppercase tracking-wider italic">Investasi Sistem Sepenuhnya Ditanggung Invila™</p>
-                </div>
-
-                <div class="bg-slate-100 rounded-3xl p-6 md:p-8 border border-slate-200">
-                    <p class="label-header text-slate-500 mb-3 italic">Nilai Manfaat Aset Bulanan</p>
-                    <div id="depreciation_val" class="value-display text-slate-800 italic tracking-tighter">Rp 0</div>
-                    <p class="mt-4 text-slate-500 text-[10px] font-bold uppercase tracking-wider italic">Ekuivalen Depresiasi Alat 20 Tahun</p>
-                </div>
-            </div>
-
-            <div class="bg-emerald-600 rounded-[2rem] p-8 md:p-10 text-white shadow-xl border-b-8 border-emerald-800">
-                <div class="flex flex-col items-center">
-                    <p class="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-4 opacity-90 italic text-center text-emerald-100">Total Penghematan Biaya Air Klien (Monthly Saving)</p>
-                    <div id="net_saving" class="value-display md:text-5xl font-black italic tracking-tighter text-center">Rp 0</div>
-                    
-                    <div class="mt-8 pt-6 border-t border-white/20 w-full text-center">
-                        <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-80 mb-2 italic">Akumulasi Penghematan Per Tahun</p>
-                        <div id="annual_net" class="text-xl md:text-3xl font-extrabold italic">Rp 0</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-2xl">
-                <h3 class="text-blue-900 text-sm font-extrabold mb-3 uppercase italic tracking-widest text-center">Keuntungan Strategis Bagi Perusahaan Anda:</h3>
-                <ul class="text-blue-800 text-[11px] md:text-[13px] space-y-2 font-semibold italic">
-                    <li class="flex items-start gap-2"><span>✓</span> <strong>Zero CAPEX:</strong> Perusahaan Anda tidak perlu mengeluarkan modal awal milyaran rupiah untuk infrastruktur SPAM.</li>
-                    <li class="flex items-start gap-2"><span>✓</span> <strong>Cash Flow Aman:</strong> Seluruh biaya operasional (OPEX) jauh lebih rendah dari tarif PDAM, langsung meningkatkan margin laba bulanan.</li>
-                    <li class="flex items-start gap-2"><span>✓</span> <strong>Bebas Resiko Depresiasi:</strong> Beban penyusutan aset dan pemeliharaan teknis selama 20 tahun sepenuhnya menjadi tanggung jawab Invila™.</li>
-                </ul>
-            </div>
-
-            <div class="text-center pt-2">
-                <button onclick="kirimWA()" 
-                    class="w-full bg-slate-900 hover:bg-black text-white px-8 py-5 rounded-2xl text-xl font-extrabold transition shadow-lg transform active:scale-95 italic uppercase tracking-wider">
-                    Konsultasi SPAM via WhatsApp
-                </button>
-            </div>
-
-        </div>
+    <div class="input-group">
+        <label>Operational Capacity (m³/day)</label>
+        <input type="number" id="v" value="1000" oninput="run()">
+    </div>
+    <div class="input-group">
+        <label>Baseline Tariff (IDR)</label>
+        <input type="number" id="e" value="14800" oninput="run()">
+    </div>
+    <div class="input-group">
+        <label>Invila Tariff (IDR)</label>
+        <input type="number" id="i" value="6000" oninput="run()">
     </div>
 
-    <script>
-        function calculate() {
-            const vol = parseFloat(document.getElementById('vol_total').value) || 0;
-            const pdam = parseFloat(document.getElementById('pdam_price').value) || 0;
-            const invila = parseFloat(document.getElementById('invila_price').value) || 0;
+    <div class="recovery-banner">
+        <span style="font-size: 10px; font-weight: 700; color: #94A3B8;">5-YEAR LIQUIDITY RECOVERY</span>
+        <h2 id="res_5">IDR 0</h2>
+    </div>
 
-            const fmt = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 });
+    <button class="btn-luxury" onclick="generateReport()">Generate Strategic Report</button>
 
-            // 1. Monthly Saving (Selisih Tarif)
-            const netSaving = (pdam - invila) * vol * 30;
-            const annualNet = netSaving * 12;
+    <footer>
+        PREPARED BY: INVILA™ STRATEGIC ADVISORY<br>
+        Lead Strategic Engineer: Piator Simbolon
+    </footer>
+</div>
 
-            // 2. CAPEX & Depreciation (Ditanggung Invila, tapi ditampilkan sebagai "Avoided Cost")
-            const lps = vol / 86.4;
-            const capexAvoided = lps * 350000000;
-            const assetValueMonthly = capexAvoided / (20 * 12);
+<script>
+    const CAPEX_CONST = 2893519;
+    function fmt(n) { return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(n).replace("Rp", "Rp "); }
 
-            // Update UI
-            document.getElementById('capex_value').innerText = fmt.format(capexAvoided).replace("Rp", "Rp ");
-            document.getElementById('depreciation_val').innerText = fmt.format(assetValueMonthly).replace("Rp", "Rp ");
-            document.getElementById('net_saving').innerText = fmt.format(netSaving).replace("Rp", "Rp ");
-            document.getElementById('annual_net').innerText = fmt.format(annualNet).replace("Rp", "Rp ");
+    function run() {
+        const v = parseFloat(document.getElementById('v').value) || 0;
+        const e = parseFloat(document.getElementById('e').value) || 0;
+        const i = parseFloat(document.getElementById('i').value) || 0;
+        const savings = v * 30 * 60 * (e - i);
+        document.getElementById('res_5').innerText = fmt(savings);
+    }
+    window.onload = run;
+
+    function generateReport() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const v = document.getElementById('v').value;
+        const e = document.getElementById('e').value;
+        const i = document.getElementById('i').value;
+        const gap = e - i;
+        const yearly = v * 365 * gap;
+        const total = v * 30 * 60 * gap;
+        const capexAvoid = v * CAPEX_CONST;
+
+        // Cover Page
+        doc.setFillColor(2, 6, 23); doc.rect(0, 0, 210, 297, 'F');
+        doc.setTextColor(197, 160, 89); doc.setFont("times", "bold"); doc.setFontSize(26);
+        doc.text("VALUE OPTIMIZATION REPORT 2026", 20, 60);
+        doc.setFontSize(14); doc.setTextColor(255);
+        doc.text("Strategic Infrastructure & Liquidity Recovery Memorandum", 20, 72);
+
+        // Content Page
+        doc.addPage();
+        doc.setTextColor(2, 6, 23); doc.setFontSize(14); doc.setFont("helvetica", "bold");
+        doc.text("1. EXECUTIVE SUMMARY: THE STRATEGIC PIVOT", 20, 30);
+        doc.setFontSize(10); doc.setFont("helvetica", "normal");
+        const summary = "Analisis ini memvalidasi pengalihan risiko infrastruktur ke model Asset-Light (Water-as-a-Service / WaaS). Strategi ini secara instan mengoptimalkan arus kas operasional tanpa pengeluaran modal (CapEx).";
+        doc.text(doc.splitTextToSize(summary, 170), 20, 40);
+
+        doc.setFont("helvetica", "bold"); doc.text("2. STRATEGIC ASSESSMENT METRICS", 20, 65);
+        doc.setFillColor(245, 247, 250); doc.rect(20, 72, 170, 45, 'F');
+        doc.text("Baseline Tariff: " + fmt(e) + "/m3", 25, 85);
+        doc.text("Invila Tariff: " + fmt(i) + "/m3", 25, 95);
+        doc.text("CapEx Exposure Avoidance: " + fmt(capexAvoid), 25, 105);
+
+        doc.setFont("helvetica", "bold"); doc.text("3. PROJECTED 5-YEAR CASH RECOVERY", 20, 130);
+        for(let yr=1; yr<=5; yr++) {
+            doc.text("Year " + yr + ": " + fmt(yr * yearly * (360/365)), 25, 130 + (yr*8));
         }
 
-        function kirimWA() {
-            const vol = document.getElementById('vol_total').value;
-            const msg = `Halo Tim Invila, saya ingin konsultasi sistem SPAM.\n\nUntuk:\n• Kapasitas: ${vol} m³/hari sesuai simulasi Volume (m³/hari)`;
-            window.open(`https://wa.me/6285890135859?text=${encodeURIComponent(msg)}`, '_blank');
-        }
+        doc.setFont("helvetica", "bold"); doc.text("4. AUDITOR'S STRATEGIC OPINION", 20, 190);
+        const opinion = "Transisi ke model Invila™ WaaS memindahkan seluruh risiko teknis dan biaya pemeliharaan ke pihak ketiga. Hal ini memungkinkan manajemen fokus sepenuhnya pada kompetensi inti manufaktur.";
+        doc.setFont("helvetica", "normal"); doc.text(doc.splitTextToSize(opinion, 170), 20, 200);
 
-        window.onload = calculate;
-    </script>
+        // SIGNATURE
+        doc.setFont("helvetica", "bold"); doc.setFontSize(11);
+        doc.text("Prepared by:", 20, 250);
+        doc.setTextColor(197, 160, 89); doc.text("Piator Simbolon", 20, 257);
+        doc.setTextColor(0); doc.setFont("helvetica", "normal"); doc.setFontSize(10);
+        doc.text("Water & Strategic Engineer | Invila™ Strategic Advisory", 20, 263);
+
+        window.open(doc.output('bloburl'), '_blank');
+    }
+</script>
 </body>
 </html>
